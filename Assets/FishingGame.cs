@@ -6,14 +6,21 @@ using UnityEngine.UI;
 
 public class FishingGame : MonoBehaviour
 {
+
     [SerializeField] private Inventory  _inventory;
     [SerializeField] private GameObject _fishgame;
     [SerializeField] private GameObject _leftclick;
     [SerializeField] private GameObject _fishbar;
+    [SerializeField] private GameObject _spawnPoint;
+    [SerializeField] private GameObject fishPrefab;
+
     private Image _frontBar;
 
     bool canfish = false;
     bool isfishing = false;
+
+    float heightOffset = 0.25f;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -50,12 +57,11 @@ public class FishingGame : MonoBehaviour
         isfishing = false; 
     }
 
-    //Need to fix
     private IEnumerator FishGame()
     {
         isfishing = true;
         canfish = false;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         _fishbar.SetActive(true);
         _frontBar.rectTransform.sizeDelta = new Vector2(0, 100);
         int x = 0;
@@ -75,8 +81,12 @@ public class FishingGame : MonoBehaviour
                 _fishbar.SetActive(false);
 
                 _inventory.addfish(1); //will scale on upgrades
+                Vector3 spawnPosition = _spawnPoint.transform.position + new Vector3(0, _inventory.getfish() * heightOffset, 0);
 
-                yield return new WaitForSeconds(1f);
+                Instantiate(fishPrefab, spawnPosition, Quaternion.identity);
+
+
+                yield return new WaitForSeconds(0.1f);
                 canfish = true;
                 isfishing =false; break;
 

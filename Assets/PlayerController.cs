@@ -50,6 +50,23 @@ public class PlayerController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = playerCam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            // ray hits any collider 
+            if (Physics.Raycast(ray, out hit))
+            {
+                if(hit.collider.gameObject.TryGetComponent<Iinteract>(out var interactable))
+                {
+                    interactable.interact();
+                }
+
+            }
+        }
     }
 
     private void LateUpdate()
@@ -63,4 +80,10 @@ public class PlayerController : MonoBehaviour
         Vector3 move = (_movementDirection * _playerSpeed) + _velocity;
         _characterController.Move(move * Time.deltaTime);
     }
+}
+
+
+public interface Iinteract
+{
+    void interact();
 }

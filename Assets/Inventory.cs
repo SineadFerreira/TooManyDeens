@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
     public int fish;
+    [SerializeField] TextMeshProUGUI fishNum;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +22,13 @@ public class Inventory : MonoBehaviour
     public void addfish(int addfish)
     {
         fish += addfish;
-        Debug.Log("Added " + addfish + " fish");
+        fishNum.text = fish.ToString();
+
     }
     public void removefish(int removefish) 
     { 
         fish -= removefish;
-        Debug.Log("Removed " + removefish + " fish");
+        fishNum.text = fish.ToString();
     }
     public int getfish()
     {
