@@ -7,6 +7,7 @@ public class Inventory : MonoBehaviour
 {
     public int fish;
     [SerializeField] TextMeshProUGUI fishNum;
+    public List<GameObject> spawnedFishStack = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {

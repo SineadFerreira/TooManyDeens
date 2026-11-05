@@ -16,12 +16,11 @@ public class FishingGame : MonoBehaviour
 
     private Image _frontBar;
 
+    
+
     bool canfish = false;
     bool isfishing = false;
-
-    float heightOffset = 0.25f;
     
-    // Start is called before the first frame update
     void Start()
     {
         _leftclick = GameObject.Find("LeftClick");
@@ -81,10 +80,11 @@ public class FishingGame : MonoBehaviour
                 _fishbar.SetActive(false);
 
                 _inventory.addfish(1); //will scale on upgrades
-                Vector3 spawnPosition = _spawnPoint.transform.position + new Vector3(0, _inventory.getfish() * heightOffset, 0);
+                Vector3 spawnPosition = _spawnPoint.transform.position + new Vector3(0, _inventory.getfish() * 0.15f, 0);
 
-                Instantiate(fishPrefab, spawnPosition, Quaternion.identity);
-
+                GameObject newFish = Instantiate(fishPrefab, spawnPosition, Quaternion.identity);
+                newFish.transform.rotation = Quaternion.Euler(0, 80, 0);
+                _inventory.spawnedFishStack.Add(newFish);
 
                 yield return new WaitForSeconds(0.1f);
                 canfish = true;
@@ -95,6 +95,7 @@ public class FishingGame : MonoBehaviour
         }
    
     }
+
 
 
 }
