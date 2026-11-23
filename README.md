@@ -18,10 +18,10 @@ De-gutting the fish with timer bar
 There are 4 main steps, fish, de-gut the fish, can the fish, sell the fish. I plan to add upgrades to each section.
 
 ## Features so far
--Player movement
--Fishing minigame
--De-gut fish with timer
--Ability to carry fish
+- Player movement
+- Fishing minigame
+- De-gut fish with timer
+- Ability to carry fish
 
 ## Planned
 - Can the fish
